@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2026-03-31T11:23:35 IST" name="Amazon Suite" finished-at="2026-03-31T11:24:43 IST" duration-ms="68092">
+    <groups>
+    </groups>
+    <test started-at="2026-03-31T11:23:35 IST" name="Smoke" finished-at="2026-03-31T11:24:43 IST" duration-ms="68092">
+      <class name="AuthenticationOperationsTest">
+        <test-method is-config="true" signature="setReport()[pri:0, instance:AuthenticationOperationsTest@5c33f1a9]" started-at="2026-03-31T11:23:35 IST" name="setReport" finished-at="2026-03-31T11:23:35 IST" duration-ms="442" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setReport -->
+        <test-method is-config="true" signature="start(org.testng.ITestResult)[pri:0, instance:AuthenticationOperationsTest@5c33f1a9]" started-at="2026-03-31T11:23:35 IST" name="start" finished-at="2026-03-31T11:23:50 IST" duration-ms="15027" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name={null} status=CREATED method=AuthenticationOperationsTest.userAuthentications()[pri:1, instance:AuthenticationOperationsTest@5c33f1a9] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- start -->
+        <test-method signature="userAuthentications()[pri:1, instance:AuthenticationOperationsTest@5c33f1a9]" started-at="2026-03-31T11:23:50 IST" name="userAuthentications" finished-at="2026-03-31T11:24:43 IST" duration-ms="52539" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- userAuthentications -->
+        <test-method is-config="true" signature="setStatus(org.testng.ITestResult)[pri:0, instance:AuthenticationOperationsTest@5c33f1a9]" started-at="2026-03-31T11:24:43 IST" name="setStatus" finished-at="2026-03-31T11:24:43 IST" duration-ms="7" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=userAuthentications status=SUCCESS method=AuthenticationOperationsTest.userAuthentications()[pri:1, instance:AuthenticationOperationsTest@5c33f1a9] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setStatus -->
+      </class> <!-- AuthenticationOperationsTest -->
+    </test> <!-- Smoke -->
+  </suite> <!-- Amazon Suite -->
+</testng-results>

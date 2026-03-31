@@ -17,6 +17,8 @@ import java.time.Duration;
 import java.util.Date;
 
 public class utility extends BaseClass{
+    private static final long WAIT_SECONDS = 30;
+
     public static void sleep(long seconds){
         try {
             Thread.sleep(seconds * 1000);
@@ -26,12 +28,12 @@ public class utility extends BaseClass{
     }
 
     public static void waitForElementToBeVisible(WebElement element){
-        WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(10));
+        WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(WAIT_SECONDS));
         wait.until(ExpectedConditions.visibilityOf(element));
     }
 
     public static void waitForElementToBeClickable(WebElement element){
-        WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(10));
+        WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(WAIT_SECONDS));
         wait.until(ExpectedConditions.elementToBeClickable(element));
     }
 

@@ -3,7 +3,7 @@
 <suite name="Amazon Suite" verbose="1" parallel="false">
     <test name="Smoke">
         <classes>
-            <class name="com.amazon.tests.AmazonSmokeTest"/>
+            <class name="AuthenticationOperationsTest"/>
         </classes>
     </test>
 </suite>

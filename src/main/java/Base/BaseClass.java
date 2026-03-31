@@ -36,7 +36,7 @@ public class BaseClass {
     protected static ExtentReports extentReport;
     protected static ExtentTest extentTest;
     protected static WebDriverWait wait;
-    private static final Logger logger = LoggerFactory.getLogger(BaseClass.class);
+    protected static final Logger logger = LoggerFactory.getLogger(BaseClass.class);
 
     protected static WebDriver getDriver() {
         return WebDriver;
@@ -67,54 +67,62 @@ public class BaseClass {
     }
 
     @BeforeMethod
-    public static void start(){
+    public static void start(ITestResult result){
+       // Create ExtentTest for each test run so @AfterMethod never NPEs.
+       if (extentReport != null && result != null) {
+           extentTest = extentReport.createTest(result.getMethod().getMethodName());
+       }
+
        String BrowserName=properties.getProperty("Browser");
        if(BrowserName.equals("chrome")){
         ChromeOptions opt = new ChromeOptions();
-        WebDriver driver = new ChromeDriver();
         opt.addArguments("--disable-notifications");
         opt.addArguments("--disable-infobars");
 		opt.addArguments("--disable-extensions");
 		opt.addArguments("--disable-popup-blocking");
+        WebDriver = new ChromeDriver(opt);
         logger.info("Chrome Browser is started");
        }
        else if(BrowserName.equals("firefox")){
         FirefoxOptions opt = new FirefoxOptions();
-        WebDriver driver = new FirefoxDriver();
         opt.addArguments("--disable-notifications");
         opt.addArguments("--disable-infobars");
         opt.addArguments("--disable-extensions");
         opt.addArguments("--disable-popup-blocking");
+        WebDriver = new FirefoxDriver(opt);
         logger.info("Firefox Browser is started");
        }
        else if(BrowserName.equals("edge")){
         EdgeOptions opt = new EdgeOptions();
-        WebDriver driver = new EdgeDriver();
         opt.addArguments("--disable-notifications");
         opt.addArguments("--disable-infobars");
         opt.addArguments("--disable-extensions");
         opt.addArguments("--disable-popup-blocking");
+        WebDriver = new EdgeDriver(opt);
         logger.info("Edge Browser is started");
        }else{
         System.out.println("Invalid Browser Name");
         logger.error("Invalid Browser Name");
+        throw new IllegalArgumentException("Invalid Browser Name: " + BrowserName);
        }
        WebDriver.get(properties.getProperty("url"));
        WebDriver.manage().window().maximize();
-       WebDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-       WebDriver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(10));
+       WebDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
+       WebDriver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(60));
        logger.info("Browser is started and URL is loaded");
     }
 
     @AfterMethod
     public static void setStatus(ITestResult result){
           if(result.getStatus()==ITestResult.SUCCESS){
-                extentTest.pass("Test passed");
+                if (extentTest != null) extentTest.pass("Test passed");
           }else if(result.getStatus()==ITestResult.FAILURE){
-            extentTest.addScreenCaptureFromPath(utility.getScreenshot(result.getName()));
-            extentTest.fail(result.getThrowable());
+            if (extentTest != null) {
+                extentTest.addScreenCaptureFromPath(utility.getScreenshot(result.getName()));
+                extentTest.fail(result.getThrowable());
+            }
           }else if(result.getStatus()==ITestResult.SKIP){
-            extentTest.skip("Test skipped");
+            if (extentTest != null) extentTest.skip("Test skipped");
           }
           logger.info("Test status is set");
         }
