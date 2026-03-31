@@ -6,7 +6,7 @@
       <class name="AuthenticationOperationsTest">
         <methods>
           <include name="start"/>
-          <include name="userAuthentications"/>
+          <include name="userAuthentications" invocation-numbers="0"/>
           <include name="setStatus"/>
           <include name="setReport"/>
         </methods>
